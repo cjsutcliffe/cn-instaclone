@@ -29,7 +29,10 @@ function App() {
 
   return (
     <div className="App">
+
+      {/* button to be replaced with token check */}
       <button onClick={(event) => setLoggedIn(!loggedIn)}>Login or logout</button>
+  
       {loggedIn ?
       photos.map((item,index) => {
         return (
