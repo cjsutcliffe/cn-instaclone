@@ -5,7 +5,9 @@ import {useState, useEffect} from 'react';
 function App() {
   const [user, setUser] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  useEffect(() => {fetchImages()},[]);
   
 
   const myArray = [{name:"Harry"},{name:"George"},{name:"Hermione"},{name:"Mafalda"}];
@@ -19,8 +21,6 @@ function App() {
     console.log(photos);
   };
 
-  useEffect(() => {fetchImages()},[]);
-
   // for (let index = 0; index < myArray.length; index++) {
   // const element = myArray[index];
   //   console.log(element);  
@@ -29,15 +29,19 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button onClick={(event) => fetchImages()}>Fetch Images</button> */}
-      {photos.map((item,index) => {
+      <button onClick={(event) => setLoggedIn(!loggedIn)}>Login or logout</button>
+      {loggedIn ?
+      photos.map((item,index) => {
         return (
           <div>
-            <img src={item.download_url} width="300px" alt="" />
+            <img src={item.download_url} width="300px" />
             <h2>{item.author}</h2>
           </div>
         )
-      })}
+      })
+      :
+      <h1>Please Login</h1>
+    }
       {/* {&& is the equivalent of an IF statement} */}
       {/* {* and : are the equivalent of an IF statement} */}
       {/* <input onChange={(event) => setUser(event.target.value)}/>
