@@ -1,16 +1,12 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import Login from './components/login';
+import Login from './components/Login';
+
 
 function App() {
   const [user, setUser] = useState("");
   const [photos, setPhotos] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [token, setToken] = useState();
-
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
 
   useEffect(() => {fetchImages()},[]);
   
@@ -28,15 +24,10 @@ function App() {
 
   return (
     <div className="App">
-
-      <Login/>
-
-      {}
-
-      {/* button to be replaced with token check */}
-      <button onClick={(event) => setLoggedIn(!loggedIn)}>Login or logout</button>
+      <Login setter={setUser}/>
+      <h1>{user} is logged in</h1>
   
-      {loggedIn ?
+      {user ?
       photos.map((item,index) => {
         return (
           <div>
