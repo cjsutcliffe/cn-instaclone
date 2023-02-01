@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { login } from "../utils/utilities";
+import { login, createUser } from "../utils/utilities";
 import {setLoggedIn, setUser} from "../App"
 
-const Login = ({setter, token, setToken}) => {
+const AddUser = ({setter}) => {
     const [username,setUsername] =useState();
     const [email,setEmail] =useState();
     const [password,setPassword] =useState();
 
     const submitHandler = async (event) => {
         event.preventDefault();
-        console.log("executing login request")
-        await login(username,email,password,setter);
+        console.log("executing add user request")
+        //create user in utils
+        await createUser(username,email,password,setter);
     }
     
     return (
@@ -18,18 +19,9 @@ const Login = ({setter, token, setToken}) => {
             <input onChange={(event) => setUsername(event.target.value)} />
             <input onChange={(event) => setEmail(event.target.value)} />
             <input onChange={(event) => setPassword(event.target.value)} />
-            <button onClick={submitHandler}>Submit</button>
-            <button onClick={() => {
-                setLoggedIn(false);
-                let name = 'jwt_token';
-                document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                setUser("");
-                console.log(token)}}>
-                    Logout</button>
-        
-
+            <button onClick={submitHandler}>Add User</button>
         </form>
     )
 }
 
-export default Login;
+export default AddUser;

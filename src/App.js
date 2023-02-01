@@ -1,6 +1,7 @@
 import './App.css';
 import {useState, useEffect} from 'react';
 import Login from './components/Login';
+import AddUser from './components/addUser';
 import { readCookie } from './common';
 import { authCheck } from './utils/utilities';
 
@@ -37,11 +38,20 @@ function App() {
     console.log(photos);
     }
 
+  //Log out function:
+  // const logout = () => {
+  //   document.cookie = "jwt_token =; path=/; expires = Thu, 01 Jan 1970 00:00:01 GMT;"
+  //   setUser("");
+  // }
+
   return (
     <div className="App">
+    
       <Login setter={setUser}/>
       <h1>{user} is logged in</h1>
   
+      <AddUser/>.
+
       {user ?
       photos.map((item,index) => {
         return (
