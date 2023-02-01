@@ -41,3 +41,26 @@ export const authCheck  = async (jwt_token) => {
         console.log(error)
     }
 }
+
+export const createUser = async (username,email,password,setter,cookie) => {
+    try {
+        const response = await fetch("http://localhost:5001/addUser", {
+            method:"POST",
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            }
+            )
+        })
+        const data = await response.json();
+        console.log(data);
+        console.log(data.user);
+        setter(data.user);
+        // cookie(data.token);
+        storeCookie("jwt_token",data.token,7);
+    } catch (error) {
+        console.log(error)
+    }
+}
