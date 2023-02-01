@@ -16,7 +16,7 @@ export const login = async (username,email,password,setter,cookie) => {
         console.log(data);
         console.log(data.user);
         setter(data.user);
-        // cookie(data.token);
+
         storeCookie("jwt_token",data.token,7);
     } catch (error) {
         console.log(error)
@@ -42,7 +42,7 @@ export const authCheck  = async (jwt_token) => {
     }
 }
 
-export const createUser = async (username,email,password,setter,cookie) => {
+export const addUser = async (username,email,password,setter,cookie) => {
     try {
         const response = await fetch("http://localhost:5001/addUser", {
             method:"POST",
@@ -58,9 +58,49 @@ export const createUser = async (username,email,password,setter,cookie) => {
         console.log(data);
         console.log(data.user);
         setter(data.user);
-        // cookie(data.token);
+
         storeCookie("jwt_token",data.token,7);
     } catch (error) {
         console.log(error)
+    }
+}
+
+// export const listUsers = async (setter, jwt_token) => {
+//     try { 
+//         const response = await fetch("http://localhost:5001/listUsers", {
+//             method: "GET", 
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization" : `Bearer ${jwt_token}`
+//             }
+//         }); 
+
+//         const data = await response.json(); 
+//         console.log(data.users)
+//         setter(data.users)
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+export const updateEmail = async (username, email, password, jwt_token, setter) => {
+    try {
+        const response = await fetch("http://localhost:5001/updateUser", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"},
+            "Authorization" : `Bearer ${jwt_token}`,
+        body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password
+        })
+    });
+        const data = await response.json();
+        console.log(data);
+        console.log(data.user);
+        setter(data.user);
+    } catch(error) {
+        console.log(error);
     }
 }

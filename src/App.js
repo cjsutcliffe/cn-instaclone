@@ -1,16 +1,17 @@
 import './App.css';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Login from './components/Login';
+import { readCookie } from './common/index';
+import { authCheck } from './utils/utilities'
 import AddUser from './components/addUser';
-import { readCookie } from './common';
-import { authCheck } from './utils/utilities';
-
+import ChangeEmail from './components/updateEmail';
 
 function App() {
   const [user, setUser] = useState("");
   const [photos,setPhotos] = useState([]);
   const [loggedIn,setLoggedIn] = useState(false);
   const [cookie,setCookie] = useState();
+ 
 
   async function loginWithToken(cookie) {
     const user = await authCheck(cookie);
@@ -26,8 +27,6 @@ function App() {
       loginWithToken(cookie);
     }
     },[]);
-  
-
 
   const fetchImages = async () => {
     const response = await fetch ("https://picsum.photos/v2/list");
@@ -37,26 +36,31 @@ function App() {
     setPhotos(data);
     console.log(photos);
     }
-
-  //Log out function:
-  // const logout = () => {
-  //   document.cookie = "jwt_token =; path=/; expires = Thu, 01 Jan 1970 00:00:01 GMT;"
-  //   setUser("");
-  // }
-
+  const logout = () => {
+    document.cookie = "jwt_token =; path=/; expires = Thu, 01 Jan 1970 00:00:01 GMT;";
+    setUser("");
+  }
+    
   return (
     <div className="App">
-    
       <Login setter={setUser}/>
-      <h1>{user} is logged in</h1>
-  
-      <AddUser/>.
+      <br></br>
+      {{user} && <button onClick={logout}>Logout</button>}
+      <br></br>
+      {{user} && <button onClick={logout}>List Users</button>}
+      
+      {{user} ? <h1>{user} logged in</h1> : <h1>logged out</h1>}
+      <br></br>
+      <AddUser setter={setUser}/>
+      {/* <ListUsers setter={setUser}/> */}
+      {/* <DeleteUser setter={setUser}/> */}
+      <ChangeEmail setter={setUser}/>
+      
 
-      {user ?
-      photos.map((item,index) => {
+      {user ? photos.map((item,index) => {
         return (
           <div>
-            <img src={item.download_url} width="300px" alt="" />
+            <img src={item.download_url} width="300px" alt=""/>
             <h2>{item.author}</h2>
           </div>
         )
@@ -64,8 +68,10 @@ function App() {
       :
       <h1>Please Login</h1>
     }
-
+ 
+      
     </div>
+    
   );
 }
 
