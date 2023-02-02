@@ -1,8 +1,9 @@
 import { storeCookie } from "../common";
 
+
 export const login = async (username,email,password,setter,cookie) => {
     try {
-        const response = await fetch("http://localhost:5001/login", {
+        const response = await fetch(`${process.env.REACT_APP_REST_API_URL}login`, {
             method:"POST",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify({
@@ -25,7 +26,7 @@ export const login = async (username,email,password,setter,cookie) => {
 
 export const authCheck  = async (jwt_token) => {
     try {
-        const response = await fetch ("http://localhost:5001/authCheck", {
+        const response = await fetch (`${process.env.REACT_APP_REST_API_URL}authCheck`, {
             method: "GET",
             headers: {
                 "Content-Type" : "application/json",
@@ -44,7 +45,7 @@ export const authCheck  = async (jwt_token) => {
 
 export const addUser = async (username,email,password,setter,cookie) => {
     try {
-        const response = await fetch("http://localhost:5001/addUser", {
+        const response = await fetch(`${process.env.REACT_APP_REST_API_URL}addUser`, {
             method:"POST",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify({
@@ -67,7 +68,7 @@ export const addUser = async (username,email,password,setter,cookie) => {
 
 // export const listUsers = async (setter, jwt_token) => {
 //     try { 
-//         const response = await fetch("http://localhost:5001/listUsers", {
+//         const response = await fetch(`${process.env.REACT_APP_REST_API_URL}listUsers', {
 //             method: "GET", 
 //             headers: {
 //                 "Content-Type": "application/json",
@@ -85,7 +86,7 @@ export const addUser = async (username,email,password,setter,cookie) => {
 
 export const updateEmail = async (username, email, password, jwt_token, setter) => {
     try {
-        const response = await fetch("http://localhost:5001/updateUser", {
+        const response = await fetch(`${process.env.REACT_APP_REST_API_URL}updateUser`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"},
