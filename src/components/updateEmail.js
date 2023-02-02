@@ -11,16 +11,19 @@ const ChangeEmail = ({setter}) => {
     event.preventDefault();
     setUpdatedEmail(email);
     await updateEmail(username, email);
+    console.log(setUsername);
+    console.log(password);
+    console.log(setPassword);
     };
     return (
-    <div id="email-container">
-    <h2>Update your email here:</h2>
-    <form onSubmit = {submitHandler}>
-        <input placeholder="Type your new email here" onChange ={ (e) =>  setEmail(e.target.value)} />
-        <button className="main-button" id="update-button" type="submit">Update Email</button>
-    </form>
-    <p>{updatedEmail ? `Your email has been updated to ${updatedEmail}` : ""}</p>
-    </div>
+        <div id="email-container">
+        <h2>Update your email here:</h2>
+        <form onSubmit = {submitHandler}>
+            <input placeholder="Type your new email here" onChange ={ (e) =>  setEmail(e.target.value)} />
+            <button className="main-button" id="update-button" type="submit">Update Email</button>
+        </form>
+        <p>{updatedEmail ? `Your email has been updated to ${updatedEmail}` : ""}</p>
+        </div>
     )
 }
 
