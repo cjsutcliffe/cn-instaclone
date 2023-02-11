@@ -5,6 +5,8 @@ import { readCookie } from './common/index';
 import { authCheck } from './utils/utilities'
 import AddUser from './components/addUser';
 import ChangeEmail from './components/updateEmail';
+import ListUsers from './components/listUsers';
+import DeleteUser from './components/deleteUser';
 
 function App() {
   const [user, setUser] = useState("");
@@ -12,6 +14,9 @@ function App() {
   const [loggedIn,setLoggedIn] = useState(false);
   const [cookie,setCookie] = useState();
  
+  console.log(loggedIn);
+  console.log(setLoggedIn);
+  console.log(cookie);
 
   async function loginWithToken(cookie) {
     const user = await authCheck(cookie);
@@ -46,17 +51,14 @@ function App() {
       <Login setter={setUser}/>
       <br></br>
       {{user} && <button onClick={logout}>Logout</button>}
-      <br></br>
-      {{user} && <button onClick={logout}>List Users</button>}
-      
+      <br></br>  
       {{user} ? <h1>{user} logged in</h1> : <h1>logged out</h1>}
       <br></br>
       <AddUser setter={setUser}/>
-      {/* <ListUsers setter={setUser}/> */}
-      {/* <DeleteUser setter={setUser}/> */}
+      <ListUsers setter={setUser}/>
       <ChangeEmail setter={setUser}/>
-      
-
+      <DeleteUser setter={setUser}/>
+      <br></br>
       {user ? photos.map((item,index) => {
         return (
           <div>
