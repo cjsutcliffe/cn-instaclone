@@ -109,7 +109,7 @@ export const deleteUser = async (username,email,password,setter,cookie) => {
   
   export const updateEmail = async (username,newEmail,password,setter,cookie) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_REST_API_URL}updateEmail`, {
+      const response = await fetch(`${process.env.REACT_APP_REST_API_URL}updateUser`, {
           method: "PUT",
           headers:{"Content-Type":"application/json",
                   "Authorization":`Bearer ${cookie}`},          
